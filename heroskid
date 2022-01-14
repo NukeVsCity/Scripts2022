@@ -1,0 +1,394 @@
+local plr = game.Players.LocalPlayer
+if game.PlaceId == 155615604 then
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Prison Life Hero Hub","BloodTheme")
+local Guns = Window:NewTab("Guns Mods")
+local Player = Window:NewTab("LocalPlayer")
+local PlayerSection = Player:NewSection("LocalPlayer")
+local GunsSection = Guns:NewSection("Guns")
+
+
+
+GunsSection:NewDropdown("Give Gun", "Gives you gun", {"M9", "Remington 870", "AK-47","M4A1","Riot Shield"}, function(v)
+local Gun1 = game:GetService("Workspace")["Prison_ITEMS"].giver[v].ITEMPICKUP
+local Event = game:GetService("Workspace").Remote.ItemHandler
+Event:InvokeServer(Gun1)
+end)
+
+GunsSection:NewDropdown("Gun Mods", "Makes Gun op", {"M9", "Remington 870", "AK-47","M4A1","Riot Shield"}, function(v)
+local module = nil
+if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(v) then
+   module = require(game:GetService("Players").LocalPlayer.Backpack[v].GunStates)
+elseif game:GetService("Players").LocalPlayer.Character:FindFirstChild(v) then
+   module = require(game:GetService("Players").LocalPlayer.Character[v].GunStates)
+end
+
+if module ~= nil then
+module["MaxAmmo"] = math.huge
+module["CurrentAmmo"] = math.huge
+module["StoredAmmo"] = math.huge
+module["FireRate"] = 0.00001
+module["Bullets"] = 10
+module["ReloadTime"] = 0
+module["Spread"] = 0
+module["AutoFire"] = true
+module["Range"] = math.huge
+module["Damage"] = math.huge
+end
+end)
+
+PlayerSection:NewButton("Admin Commands","Gives you admin commands", function(s)
+   loadstring(game:HttpGet(('https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife'),true))()
+end)
+
+PlayerSection:NewSlider("Walkspeed","Changes Your Walkspeed",500,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+PlayerSection:NewSlider("Jumppower","Changes Your Jumppower",200,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+end
+
+if game.PlaceId == 3956818381 then
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Ninja Legend Hero Hub","BloodTheme")
+local Main = Window:NewTab("Autofarm")
+local MainSection = Main:NewSection("Main")
+local Pets = Window:NewTab("Pets")
+local PetsSection = Pets:NewSection("Open Eggs/Evolve Pets")
+local Teleporting = Window:NewTab("Teleporting")
+local TeleportingSection = Teleporting:NewSection("Teleport To Islands")
+local Player = Window:NewTab("LocalPlayer")
+local PlayerSection = Player:NewSection("Change Your WalkSpeed/JumpPower")
+local Misc = Window:NewTab("Misc")
+local MiscSection = Misc:NewSection("Misc")
+
+local Option = nil
+
+PetsSection:NewDropdown("Choose Crystal", "You must choose Crystal to open", {"Enchanted Crystal", "Astral Crystal", "Golden Crystal", "Inferno Crystal", "Galaxy Crystal", "Blue Crystal", "Purple Crystal", "Thunder Crystal", "Frozen Crystal", "Eternal Crystal", "Storm Crystal", "Ultra Shockwave Crystal", "Secret Blades Crystal", "Infinity Void Crystal"}, function(v)
+    Option = v
+end)
+
+PetsSection:NewButton("Open", "Will open Crystal", function()
+local A_1 = "openCrystal"
+local A_2 = Option
+local Event = game:GetService("ReplicatedStorage").rEvents.openCrystalRemote
+Event:InvokeServer(A_1, A_2)
+end)
+
+PetsSection:NewToggle("Auto Open Crystal", "Auto Crystal", function(v)
+getgenv().autobuycrystal = v
+while true do 
+wait(0.1)
+if not getgenv().autobuycrystal then return end
+local A_1 = "openCrystal"
+local A_2 = Option
+local Event = game:GetService("ReplicatedStorage").rEvents.openCrystalRemote
+Event:InvokeServer(A_1, A_2)
+    end
+end)
+
+
+
+PlayerSection:NewSlider("JumpPower","Changes Your JumpPower",400,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+local Option = nil
+TeleportingSection:NewDropdown("Choose Island", "You must choose Island to teleport", {"Enchanted Island", "Astral Island", "Mystical Island", "Space Island", "Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island", "Golden Master Island", "Dragon Legend Island", "Cybernetic Legends Island", "Skystorm Ultraus Island", "Chaos Legends Island", "Soul Fusion Island", "Dark Elements Island", "Inner Peace Island", "Blazing Vortex Island"}, function(v)
+    Option = v
+end)
+TeleportingSection:NewButton("Teleport", "Will Teleport You", function()
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts[Option].CFrame
+end)
+
+MiscSection:NewButton("Open Shop", "Last shop", function(v)
+    game:GetService("Workspace").shopAreaCircles.shopAreaCircle19.circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    wait(0.4)
+    game:GetService("Workspace").shopAreaCircles.shopAreaCircle19.circleInner.CFrame = CFrame.new(0,0,0)
+end)
+
+MiscSection:NewButton("Unlock Infinite Double Jumps", "Jumping Go brrr", function(v)
+       game.Players.LocalPlayer.multiJumpCount.Value = 999999999
+
+end)
+
+MiscSection:NewButton("Unlock all Islands","Unlocks all islands", function()
+   local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+   for _,v in pairs(game:GetService("Workspace").islandUnlockParts:GetChildren()) do 
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+      wait(0.2)
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
+   end
+end)
+MiscSection:NewButton("Unlock all Elements","Unlocks all Elements", function()
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Frost")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Inferno")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Lightning")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Electral Chaos")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Masterful Wrath")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Shadow Charge")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Shadowfire")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Eternity Storm")
+game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Blazing Entity")
+end)
+
+
+MainSection:NewToggle("Auto Buy All Ranks", "AutoBuys all Ranks for you", function(v)
+       getgenv().autobuybelts = v
+       while true do
+       if not getgenv().autobuybelts then return end
+       local deku1 = "buyRank"
+       local deku2 = {"Rookie", "Grasshopper", "Apprentice", "Samurai", "Assassin", "Shadow", "Ninja", "Master Ninja", "Sensei", "Master Sensei", "Ninja Legend", "Master Of Shadows", "Immortal Assassin", "Eternity Hunter", "Shadow Legend", "Dragon Warrior", "Dragon Master", "Chaos Sensei", "Chaos Legend", "Master Of Elements"
+       , "Elemental Legend", "Ancient Battle Master", "Ancient Battle Legend", "Legendary Shadow Duelist", "Master Legend Assassin", "Mythic Shadowmaster", "Legendary Shadowmaster", "Awakened Scythemaster", "Awakened Scythe Legend", "Master Legend Zephyr", "Golden Sun Shuriken Master", "Golden Sun Shuriken Legend", "Dark Sun Samurai Legend", "Dragon Evolution Form I", "Dragon Evolution Form II", "Dragon Evolution Form III", "Dragon Evolution Form IV",
+       "Dragon Evolution Form V", "Cybernetic Electro Master", "Cybernetic Electro Legend", "Shadow Chaos Assassin", "Shadow Chaos Legend", "Infinity Sensei", "Infinity Legend", "Aether Genesis Master Ninja", "Master Legend Sensei Hunter", "Skystorm Series Samurai Legend", "Master Elemental Hero", "Eclipse Series Soul Master",
+       "Starstrike Master Sensei", "Evolved Series Master Ninja", "Dark Elements Guardian", "Elite Series Master Legend", "Infinity Shadows Master", "Lightning Storm Sensei", "Dark Elements Blademaster", "Rising Shadow Eternal Ninja", "Skyblade Ninja Master", "Shadow Storm Sensei", }
+       for i = 1, #deku2 do
+       game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(deku1, deku2[i])
+       end
+       wait(0.1)
+    end
+end)
+MainSection:NewToggle("Auto Buy All Belts", "AutoBuys all Belts for you", function(v)
+    getgenv().autobuybelts = v
+    while true do
+       if not getgenv().autobuybelts then return end
+       local A_1 = "buyAllBelts"
+       local A_2 = "Inner Peace Island"
+       local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+       Event:FireServer(A_1, A_2)
+       wait(0.5)
+    end
+end)
+
+MainSection:NewToggle("Auto Buy All Skills", "AutoBuys all Belts for you", function(v)
+    getgenv().autobuybelts = v
+    while true do
+       if not getgenv().autobuybelts then return end
+       local A_1 = "buyAllSkills"
+       local A_2 = "Inner Peace Island"
+       local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+       Event:FireServer(A_1, A_2)
+       wait(0.5)
+    end
+end)
+
+MainSection:NewToggle("Auto Buy All Swords", "AutoBuys all Swords for you", function(v)
+    getgenv().autobuy = v
+    while true do
+       if not getgenv().autobuy then return end
+       local A_1 = "buyAllSwords"
+       local A_2 = "Inner Peace Island"
+       local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+       Event:FireServer(A_1, A_2)
+       wait(0.5)
+    end
+end)
+MainSection:NewToggle("Auto Sell", "Makes your player autosell ", function(v)
+    getgenv().autosell = v
+    while true do
+       if not getgenv().autosell then return end
+       game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+       wait(0.1)
+       game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = CFrame.new(0,0,0)
+       wait(0.1)
+    end
+end)
+MainSection:NewToggle("Auto Swing", "Swinges Your Katana for you", function(v)
+    if v or not v then
+        getgenv().autoswing = v
+        while true do
+        if not getgenv().autoswing then return end
+        for _,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+           if v:FindFirstChild("ninjitsuGain") then
+              game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+              break
+           end
+        end
+        local A_1 = "swingKatana"
+        local Event = game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(A_1)
+        wait()
+        end
+       end
+   end)
+
+MiscSection:NewButton("Hoop Farm", "Teleports Hoops to You", function()
+        for i,v in pairs(game:GetService("Workspace").Hoops:GetChildren()) do
+        if v:IsA("MeshPart") then
+        v.touchPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        wait(0.25)
+        v.touchPart.CFrame = CFrame.new(0,0,0)
+      end
+   end
+end)
+
+MiscSection:NewToggle("Turn On/Off Popups", "Will turn on or off popups", function(v)
+   if game:GetService("Players").LocalPlayer.PlayerGui.statEffectsGui.Enabled == false and game:GetService("Players").LocalPlayer.PlayerGui.hoopGui.Enabled == false then
+      game:GetService("Players").LocalPlayer.PlayerGui.statEffectsGui.Enabled = true
+      game:GetService("Players").LocalPlayer.PlayerGui.hoopGui.Enabled = true
+      else
+      game:GetService("Players").LocalPlayer.PlayerGui.statEffectsGui.Enabled = false
+      game:GetService("Players").LocalPlayer.PlayerGui.hoopGui.Enabled = false
+   end
+end)
+
+
+MainSection:NewKeybind("Turn UI Off", "Will make UI Invisible", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+end
+if game.PlaceId == 3101667897 then
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Legends Of Speed Hero Hub","BloodTheme")
+local Main = Window:NewTab("Main")
+local Player = Window:NewTab("LocalPlayer")
+local PlayerSection = Player:NewSection("LocalPlayer")
+local MainSection = Main:NewSection("Main")
+
+
+
+MainSection:NewButton("Get all hoops and orbs","Will teleport you to hoops", function()
+    for i,v in pairs(game:GetService("Workspace").Hoops:GetChildren()) do
+       if v:IsA("MeshPart") and v.Transparency == 0 then 
+          v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+          wait(0.10)
+          v.CFrame = CFrame.new(0,0,0)
+       end
+    end
+    for i,v in pairs(game:GetService("Workspace").orbFolder:GetChildren()) do
+       if v:IsA("Part") or v.Name == "outerOrb" or v:IsA("MeshPart") then 
+          v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+          wait(0.10)
+          v.CFrame = CFrame.new(0,0,0)
+   end
+end
+end)
+
+PlayerSection:NewSlider("Walkspeed","Changes Your Walkspeed",500,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+PlayerSection:NewSlider("Jumppower","Changes Your Jumppower",200,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+MainSection:NewKeybind("Turn UI Off", "Will make UI Invisible", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+end
+if game.PlaceId == 6953291455 then
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Eating Simulator Hero Hub","BloodTheme")
+local Main = Window:NewTab("Main")
+local Egg = Window:NewTab("Eggs")
+local EggSection = Egg:NewSection("Egg")
+local Player = Window:NewTab("LocalPlayer")
+local PlayerSection = Player:NewSection("LocalPlayer")
+local MainSection = Main:NewSection("Main")
+
+
+local Option = nil
+
+EggSection:NewDropdown("Choose Your Egg", "You must choose egg to open it", {"Basic", "Candy", "Aqua", "Desert", "Winter", "Rainforest", "Lava", "Supreme", "Heaven", "Spikes", "Fish", "Dragon", "NeonPink", "Spooky", "Blossom", "Candycane", "Gift", "Tree"}, function(v)
+    Option = v
+end)
+EggSection:NewButton("Open Once", "Will Open egg once", function()
+local A_1 = Option
+local Event = game:GetService("ReplicatedStorage").Knit.Services.EggService.RF.buy1Egg
+Event:InvokeServer(A_1)
+end)
+
+EggSection:NewToggle("Auto Open", "Auto Egg Open", function(v)
+    getgenv().autobuybelts = v
+    while true do
+       if not getgenv().autobuybelts then return end
+       local A_1 = Option
+       local Event = game:GetService("ReplicatedStorage").Knit.Services.EggService.RF.buy1Egg
+       Event:InvokeServer(A_1)
+       wait(1)
+    end
+end)
+
+
+
+MainSection:NewToggle("Auto Buy All Food", "Auto Buys all Food for you", function(v)
+    getgenv().autobuybelts = v
+    while true do
+       if not getgenv().autobuybelts then return end
+       local A_1 = "Bats"
+       local Event = game:GetService("ReplicatedStorage").Knit.Services.ShopService.RE.buyAll
+       Event:FireServer(A_1)
+       wait(0.5)
+    end
+end)
+
+
+
+MainSection:NewToggle("Auto Buy All DNA", "Auto Buys all DNA for you", function(v)
+    getgenv().autobuybelts = v
+    while true do
+       if not getgenv().autobuybelts then return end
+       local A_1 = "DNA"
+       local Event = game:GetService("ReplicatedStorage").Knit.Services.ShopService.RE.buyAll
+       Event:FireServer(A_1)
+       wait(0.5)
+    end
+end)
+
+MainSection:NewToggle("Auto Sell", "Makes your player autosell ", function(v)
+    getgenv().autosell = v
+    while true do
+       local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+       if not getgenv().autosell then return end
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-22.7848034, -1.33851898, -6.76697302, 0.0101919454, -1.45053569e-08, 0.999948084, 1.85455153e-08, 1, 1.43170862e-08, -0.999948084, 1.83986337e-08, 0.0101919454)
+       wait(0.1)
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
+       task.wait(5)
+    end
+end)
+
+
+MainSection:NewToggle("Auto Click", "Makes your player Autoclick ", function(v)
+       getgenv().autosell = v
+       while true do
+       if not getgenv().autosell then return end
+       for _,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+           if v:IsA("Tool") and v.Name == "swing" then
+              game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+              break
+           end
+        end
+       wait(0.1)
+       game:GetService'VirtualUser':Button1Down(Vector2.new(1,1))
+    end
+end)
+
+MainSection:NewToggle("Turn off all zone barriers", "Will turn off all zone barriers", function(state)
+    if state then
+for i,v in pairs(game:GetService("Workspace").Barriers:GetChildren()) do
+       if v:IsA("MeshPart") then
+          v.CanCollide = false
+          v.Transparency = 1
+       end
+    end
+    else
+        for i,v in pairs(game:GetService("Workspace").Barriers:GetChildren()) do
+       if v:IsA("MeshPart") then
+          v.CanCollide = true
+          v.Transparency = 0.5
+       end
+    end
+    end
+end)
+PlayerSection:NewSlider("WalkSpeed","Changes Your WalkSpeed",500,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+
+PlayerSection:NewSlider("JumpPower","Changes Your JumpPower",400,0,function(s)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+MainSection:NewKeybind("Turn UI Off", "Will make UI Invisible", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+end
+
