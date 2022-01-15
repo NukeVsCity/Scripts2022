@@ -1,4 +1,4 @@
---BROUGHT TO YOU BY RSCRIPTS.NET--
+
 
 print("made by baconlord")
 if game.PlaceId == 1067560271 then
