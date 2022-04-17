@@ -1,0 +1,6 @@
+local p = game:GetService("ReplicatedStorage").Knit.Services.WorldCurrencyService.RE.PickupCurrency
+for i,v in pairs(game:GetService("Workspace").Map.Objects:GetChildren()) do
+   if v:IsA("Model") then
+       p:FireServer(v.Name)  
+   end
+end
