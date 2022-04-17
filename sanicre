@@ -1,0 +1,3 @@
+while wait(4) do
+game:GetService("ReplicatedStorage").Knit.Services.LevelingService.RF.AttemptRebirth:InvokeServer()
+end
