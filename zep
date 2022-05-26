@@ -1,4 +1,4 @@
-writefile("ZEPHYR.ZEP","ZEPHYRXKEY0563782856628-oye2")
+writefile("ZEPHYR.ZEP","ZEPHYRXKEY93628499072773-au2")
 _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
