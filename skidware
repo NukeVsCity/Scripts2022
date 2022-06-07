@@ -1,0 +1,1492 @@
+
+
+
+-- I DONT CARE AT ALL WHAT HAPPENS TO THIS SCRIPT
+-- GOT BY NUKEVSCITY
+-- SOGGYWARE WAS STEALING IPS!!!!
+
+
+local startTick = tick()
+
+repeat task.wait() until game:IsLoaded()
+
+pcall(function()
+    game.Players.LocalPlayer.Character.Head.PlayerTitle.Username.Text = "Spoofed By Nuke The Great"
+end)
+
+local eggs = {}
+local selectedEgg
+local selectedType
+
+-- Services
+
+local Players = game:GetService("Players")
+local ReSt = game:GetService("ReplicatedStorage")
+
+-- Variables
+
+local Plr = Players.LocalPlayer
+
+local BlocksData = require(ReSt.SharedModules.Data.Blocks)
+local LocalData = require(ReSt.ClientModules.LocalData)
+
+-- Functions
+
+local function getCoinMultiplier()
+    local text = Plr.PlayerGui.ScreenGui.HUD.Debug.Debug14.Label.Text
+    return string.gsub(string.sub(text, string.find(text, "x"), #text), "%D", "") / 100
+end
+
+local function getInventoryValue()
+    local BackpackInventory = LocalData:GetData("BackpackInventory")
+    local value = 0
+
+    for i, v in next, BackpackInventory do
+        value = value + BlocksData[v[1]].Value[2] * v[2] * getCoinMultiplier()
+    end
+
+    return value
+end
+
+for _, v in next, game:GetService("ReplicatedStorage").Assets.Eggs:GetChildren() do
+    table.insert(eggs, v.Name)
+end
+
+local worlds = {}
+local selectedWorld
+
+for _, v in next, game:GetService("Workspace").Checkpoints:GetChildren() do
+    table.insert(worlds, v.Name)
+end
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+function teleportToWorld(world)
+    local args = {
+        [1] = world
+    }
+    game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+end
+
+function buyBackpacks()
+    for i = 1, 100 do
+        local args = {
+            [1] = "SurfaceBackpacks",
+            [2] = i
+        }
+        game:GetService("ReplicatedStorage").Events.PurchaseShopItem:FireServer(unpack(args))
+    end
+end
+
+function buyPickaxes()
+    for i = 1, 100 do
+        local args = {
+            [1] = "SurfaceTools",
+            [2] = i
+        }
+        game:GetService("ReplicatedStorage").Events.PurchaseShopItem:FireServer(unpack(args))
+    end
+end
+
+function hatch(egg, bool)
+    if bool == false then
+        local args = {
+            [1] = egg
+        }
+        game:GetService("ReplicatedStorage").Events.OpenEgg:FireServer(unpack(args))
+    elseif bool == true then
+        local args = {
+            [1] = egg,
+            [2] = true
+        }
+        game:GetService("ReplicatedStorage").Events.OpenEgg:FireServer(unpack(args))
+    end
+end
+
+function chest()
+    for _, v in next, game:GetService("Workspace").Checkpoints:GetDescendants() do
+        if v.Name == "TouchInterest" and v.Parent then
+            firetouchinterest(game.Players.LocalPlayer.Character.Headers, v.Parent, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character.Headers, v.Parent, 1)
+        end
+    end
+end
+
+local codes = {"Release", "FreeEgg", ""}
+
+function codes()
+    for i = 1, #codes do
+        local args = {
+            [1] = codes[i]
+        }
+        game:GetService("ReplicatedStorage").Functions.RedeemCode:InvokeServer(unpack(args))
+    end
+end
+
+local title =
+    "SkidWare by NukeVsCity"
+
+local Config = {
+    WindowName = title,
+    Color = Color3.fromRGB(3, 127, 252),
+    Keybind = Enum.KeyCode.F
+}
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/AlexR32/Roblox/main/BracketV3.lua"))()
+local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
+local Notification = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
+
+Notification:MakeNotification(
+    {
+        Name = "Skidware",
+        Content = "Welcome " .. game.Players.LocalPlayer.Name .. " the hub is loading now!",
+        Image = "rbxassetid://7072718307",
+        Time = 1
+    }
+)
+
+local Tab = Window:CreateTab("Main")
+
+local Section = Tab:CreateSection("Farming")
+
+Section:CreateToggle(
+    "Auto Explosion Mine",
+    nil,
+    function(x)
+        getgenv().AutoExplosion = x
+
+        while AutoExplosion do
+            local args = {
+                [1] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position,
+                [2] = Vector3.new(-0.8517764210700989, -0.5142312049865723, 0.100215382874012)
+            }
+            game:GetService("ReplicatedStorage").Events.ThrowExplosive:FireServer(unpack(args))
+            task.wait(0.5)
+        end
+    end
+)
+
+function IlIlIIIIlllIlI(data)
+    local b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    data = string.gsub(data, "[^" .. b .. "=]", "")
+    return (data:gsub(
+        ".",
+        function(x)
+            if (x == "=") then
+                return ""
+            end
+            local r, f = "", (b:find(x) - 1)
+            for i = 6, 1, -1 do
+                r = r .. (f % 2 ^ i - f % 2 ^ (i - 1) > 0 and "1" or "0")
+            end
+            return r
+        end
+    ):gsub(
+        "%d%d%d?%d?%d?%d?%d?%d?",
+        function(x)
+            if (#x ~= 8) then
+                return ""
+            end
+            local c = 0
+            for i = 1, 8 do
+                c = c + (x:sub(i, i) == "1" and 2 ^ (8 - i) or 0)
+            end
+            return string.char(c)
+        end
+    ))
+end
+
+Section:CreateToggle(
+    "Auto Mine",
+    nil,
+    function(x)
+        getgenv().automine = x
+
+        while automine do
+            task.wait()
+            Depth = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.HUD.Top.Bar.Inner.Arrow.Depth.Text
+            local Depth1 = string.gsub(Depth, ",", "")
+            local Depth2 = string.gsub(Depth1, "m", "")
+            Depth3 = tonumber(Depth2)
+            Depth4 = tonumber(Depth3 + 1)
+            if Depth3 < 100 then
+                local a = math.random(0, 12)
+                local b = math.random(Depth3, Depth4)
+                local c = math.random(0, 12)
+                local args = {
+                    [1] = Vector3.new(a, b, c)
+                }
+                game:GetService("ReplicatedStorage").Events.MineBlock:FireServer(unpack(args))
+            elseif Depth3 > 100 then
+                local a = math.random(4, 9)
+                local b = math.random(Depth3, Depth4)
+                local c = math.random(4, 9)
+                local args = {
+                    [1] = Vector3.new(a, b, c)
+                }
+                game:GetService("ReplicatedStorage").Events.MineBlock:FireServer(unpack(args))
+            elseif game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.HUD.Top.Bar.Visible == false then
+                local a = math.random(0, 12)
+                local b = math.random(1, 2)
+                local c = math.random(0, 12)
+                local args = {
+                    [1] = Vector3.new(a, b, c)
+                }
+                game:GetService("ReplicatedStorage").Events.MineBlock:FireServer(unpack(args))
+            end
+        end
+    end
+)
+
+local _speed = 10
+function tp(...)
+    local plr = game.Players.LocalPlayer
+    local args = {...}
+    if typeof(args[1]) == "number" and args[2] and args[3] then
+        args = Vector3.new(args[1], args[2], args[3])
+    elseif typeof(args[1]) == "Vector3" then
+        args = args[1]
+    elseif typeof(args[1]) == "CFrame" then
+        args = args[1].Position
+    end
+    local dist = (plr.Character.HumanoidRootPart.Position - args).Magnitude
+    local sellTween =
+        game:GetService("TweenService"):Create(
+        plr.Character.HumanoidRootPart,
+        TweenInfo.new(dist / _speed, Enum.EasingStyle.Linear),
+        {CFrame = CFrame.new(args)}
+    ):Play()
+end
+
+function IllIllIIllIIllII(IllI, lllIl)
+    IllI:Kick(lllIl)
+end
+
+function IllIIlIllIl()
+    IllIllIIllIIllII(game.Players.LocalPlayer, IlIlIIIIlllIlI("b29mLCB0aGlzIHNjcmlwdCB3YXMgc2tpZGRlZA=="))
+end
+
+function tp2(...)
+    local plr = game.Players.LocalPlayer
+    local args = {...}
+    if typeof(args[1]) == "number" and args[2] and args[3] then
+        args = Vector3.new(args[1], args[2], args[3])
+    elseif typeof(args[1]) == "Vector3" then
+        args = args[1]
+    elseif typeof(args[1]) == "CFrame" then
+        args = args[1].Position
+    end
+    local dist = (plr.Character.HumanoidRootPart.Position - args).Magnitude
+    game:GetService("TweenService"):Create(
+        plr.Character.HumanoidRootPart,
+        TweenInfo.new(dist / _speed, Enum.EasingStyle.Linear),
+        {CFrame = CFrame.new(args)}
+    ):Play()
+end
+
+function IllIllIllIl(args)
+    Il = {args}
+    return Il
+end
+
+hookfunction(IllIllIllIl, IllIIlIllIl)
+
+require(game:GetService("ReplicatedStorage").SharedModules.Constants).InfiniteSymbol = "~ skidware"
+
+Section:CreateToggle(
+    "Auto Rebirth",
+    nil,
+    function(x)
+        getgenv().autorebirth = x
+
+        while autorebirth do
+            task.wait()
+            game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
+        end
+    end
+)
+
+local backpack = {}
+
+for _, v in next, game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Container.Gear.Content.Frame.Tool.Items:GetChildren(
+
+) do
+    if v.ClassName == "Frame" then
+        table.insert(backpack, v.Name)
+    end
+end
+
+for _, v in next, game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Container.Gear.Content.Frame.Explosive.Items:GetChildren(
+
+) do
+    if v.ClassName == "Frame" then
+        table.insert(backpack, v.Name)
+    end
+end
+
+local selectedWeapon
+
+local areaSell
+local assertedPositionSell
+local goBack
+
+local areas = {}
+
+for _, v in next, game:GetService("Workspace").Checkpoints:GetChildren() do
+    table.insert(areas, v.Name)
+end
+
+local Section = Tab:CreateSection("Auto Sell")
+
+Section:CreateDropdown(
+    "Select Area",
+    areas,
+    function(x)
+        areaSell = x
+    end
+)
+
+local amount
+local selectedVect
+
+Section:CreateToggle(
+    "Auto Sell",
+    nil,
+    function(x)
+        getgenv().autosell = x
+
+        while autosell do
+            task.wait()
+            pcall(
+                function()
+                    ahjd = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.X
+                    ahjd2 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z
+                    task.wait(0.5)
+                    game:GetService("ReplicatedStorage").Events.Teleport:FireServer(areaSell .. "Sell")
+                    task.wait(0.1)
+                    game:GetService("ReplicatedStorage").Events.QuickSell:FireServer()
+                    game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                    task.wait(0.5)
+                    tp2(selectedVect)
+                end
+            )
+            task.wait(amount)
+        end
+    end
+)
+
+Section:CreateButton(
+    "Set Mining Point",
+    function()
+        selectedVect = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    end
+)
+
+Section:CreateSlider(
+    "Sell Delay | Seconds",
+    1,
+    500,
+    20,
+    true,
+    function(x)
+        amount = x
+    end
+)
+
+Section:CreateDropdown(
+    "Select Weapon",
+    backpack,
+    function(x)
+        selectedWeapon = x
+    end
+)
+
+Section:CreateToggle(
+    "Auto Equip",
+    nil,
+    function(x)
+        getgenv().autoequip = x
+
+        while autoequip do
+            local args = {
+                [1] = selectedWeapon
+            }
+
+            game:GetService("ReplicatedStorage").Events.SetToolHolding:FireServer(unpack(args))
+            task.wait(3)
+        end
+    end
+)
+
+spawn(
+    function()
+        while true do
+            if IlIlIIIIlllIlI then
+            else
+                IllIllIllIl()
+            end
+            task.wait(5)
+        end
+    end
+)
+
+local Section = Tab:CreateSection("Misc")
+
+Section:CreateToggle(
+    "X RAY",
+    nil,
+    function(x)
+        getgenv().xray = x
+
+        while getgenv().xray == true do
+            task.wait()
+            if getgenv().xray == true then
+                for _, v in next, game:GetService("Workspace").Chunks:GetDescendants() do
+                    if v.ClassName == "Part" then
+                        if v.Name == "stone" or "dirt" then
+                            if v.Transparency == 0 then
+                                v.Transparency = 0.8
+                            end
+                        end
+                    end
+                end
+            elseif getgenv().xray == false then
+                for _, v in next, game:GetService("Workspace").Chunks:GetDescendants() do
+                    if v.ClassName == "Part" then
+                        if v.Name == "stone" or "dirt" then
+                            v.Transparency = 0
+                        end
+                    end
+                end
+                break
+            end
+        end
+    end
+)
+
+Section:CreateButton(
+    "Redeem Codes",
+    function()
+        codes()
+    end
+)
+
+local Section = Tab:CreateSection("Buy")
+
+Section:CreateToggle(
+    "Auto Buy Pickaxe",
+    nil,
+    function(x)
+        getgenv().PickaxeToggle = x
+
+        while PickaxeToggle do
+            task.wait(1)
+            buyPickaxes()
+        end
+    end
+)
+
+Section:CreateToggle(
+    "Auto Buy Backpacks",
+    nil,
+    function(x)
+        getgenv().backpackToggle = x
+
+        while backpackToggle do
+            task.wait(1)
+            buyBackpacks()
+        end
+    end
+)
+
+local Section = Tab:CreateSection("Worlds")
+
+Section:CreateButton(
+    "Unlock All Worlds",
+    function()
+        for i = 1, #areas do
+            game:GetService("ReplicatedStorage").Events.Teleport:FireServer(areas[i] .. "Sell")
+            task.wait(1)
+        end
+    end
+)
+
+Section:CreateDropdown(
+    "Teleport To World",
+    worlds,
+    function(x)
+        teleportToWorld(x)
+    end
+)
+
+local formatShit = {T = 12, B = 9, M = 6, Q = 15}
+
+local rebirthCost
+
+task.spawn(
+    function()
+        local a =
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Rebirth.Frame.Buy.Frame.Container.Label.Text
+
+        for i, v in next, formatShit do
+            local found = string.find(a, i)
+            if found then
+                rebirthCost = string.sub(a, 1, found - 1) * 10 ^ v
+            end
+        end
+    end
+)
+
+local Section = Tab:CreateSection("Beta")
+
+local rebirthCostSimplified = tonumber(rebirthCost)
+local coinsAndInv = tonumber(getInventoryValue()) + game:GetService("Players").LocalPlayer.leaderstats.Coins.Value
+
+spawn(
+    function()
+        while true do
+            wait()
+            rebirthCostSimplified = tonumber(rebirthCost)
+            coinsAndInv = tonumber(getInventoryValue()) + game:GetService("Players").LocalPlayer.leaderstats.Coins.Value
+        end
+    end
+)
+
+Section:CreateToggle(
+    "Advanced Auto Rebirth",
+    nil,
+    function(x)
+        getgenv().Advancedautorebirth = x
+
+        while Advancedautorebirth do
+            task.wait()
+            pcall(
+                function()
+                    if coinsAndInv >= rebirthCostSimplified then
+                        Notification:MakeNotification(
+                            {
+                                Name = "SkidWare",
+                                Content = "About to rebirth:",
+                                Image = "rbxassetid://7072718307",
+                                Time = 2
+                            }
+                        )
+                        task.wait(10)
+                        game:GetService("ReplicatedStorage").Events.Teleport:FireServer(areaSell .. "Sell")
+                        task.wait(0.1)
+                        game:GetService("ReplicatedStorage").Events.QuickSell:FireServer()
+                        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                        task.wait(1)
+                        tp2(selectedVect)
+                        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
+                    else
+                        --
+                    end
+                end
+            )
+        end
+    end
+)
+
+Section:CreateLabel("Make Sure To Select Auto Sell Area")
+
+Section:CreateLabel("And Mining Point, Second Tab For More")
+
+local Tab = Window:CreateTab("Hatching")
+
+local Section = Tab:CreateSection("Hatching")
+
+Section:CreateToggle(
+    "Egg Animation",
+    nil,
+    function(x)
+        game:GetService("ReplicatedStorage").ClientModules.Other.OpenEgg.HatchGui:Destroy()
+        game:GetService("ReplicatedStorage").ClientModules.Other.OpenCrate.CrateOpen:Destroy()
+    end
+)
+
+function blockToCell(a)
+    print(
+        "Cell Of " ..
+            a ..
+                " : " ..
+                    tostring(
+                        require(game:GetService("ReplicatedStorage").SharedModules.ChunkUtil).worldToCell(
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                        )
+                    )
+    )
+end
+Section:CreateToggle(
+    "Auto Hatch",
+    nil,
+    function(x)
+        getgenv().eggToggle = x
+
+        while eggToggle do
+            task.wait()
+            hatch(selectedEgg, selectedType)
+        end
+    end
+)
+
+Section:CreateDropdown(
+    "Select Egg",
+    eggs,
+    function(x)
+        selectedEgg = x
+    end
+)
+
+Section:CreateDropdown(
+    "Select Egg Amount",
+    {"Triple", "Single"},
+    function(x)
+        if x == "Triple" then
+            selectedType = true
+        elseif x == "Single" then
+            selectedType = false
+        end
+    end
+)
+
+local selectedCrate
+
+local crates = {}
+
+for _, v in next, game:GetService("ReplicatedStorage").Assets.Crates:GetChildren() do
+    table.insert(crates, v.Name)
+end
+
+function getpet()
+    for _, v in next, game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Index.Frame.Pages.Pets.Frame:GetDescendants(
+
+    ) do
+        if v.ClassName == "TextLabel" and v.Name == "PetName" then
+            if v.Text == "???" then
+                return v.Parent.Name
+            end
+        end
+    end
+end
+
+local targettedpet
+
+function getegg()
+    for _, v in next, game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Index.Frame.Pages.Pets.Frame:GetDescendants(
+
+    ) do
+        if v.ClassName == "Frame" and v.Name == targettedpet then
+            return v.Parent.Parent.Name
+        end
+    end
+end
+
+local targettedegg
+
+function doegg()
+    for _, v in next, game:GetService("Workspace").Eggs:GetChildren() do
+        if v.Name == targettedegg then
+            tp2(v.EggName.Position)
+            hatch(targettedegg, selectedType)
+        end
+    end
+end
+
+Section:CreateToggle(
+    "Auto Farm Pet Index",
+    nil,
+    function(x)
+        getgenv().indexToggle = x
+
+        while indexToggle do
+            targettedpet = getpet()
+            targettedegg = getegg()
+            task.wait()
+            doegg()
+        end
+    end
+)
+
+Section:CreateToggle(
+    "Auto-Crate",
+    nil,
+    function(x)
+        getgenv().crateToggle = x
+
+        while crateToggle do
+            task.wait()
+            local args = {
+                [1] = tostring(selectedCrate)
+            }
+
+            game:GetService("ReplicatedStorage").Events.OpenCrate:FireServer(unpack(args))
+        end
+    end
+)
+
+Section:CreateDropdown(
+    "Select Crate",
+    crates,
+    function(x)
+        selectedCrate = x
+    end
+)
+
+local Section = Tab:CreateSection("Pets")
+
+Section:CreateToggle(
+    "Equip Best Pets",
+    nil,
+    function(x)
+        getgenv().EquipBest = x
+
+        while EquipBest do
+            task.wait()
+            game:GetService("ReplicatedStorage").Events.EquipBestPets:FireServer()
+        end
+    end
+)
+
+local pets = {}
+
+for _, v in next, game:GetService("ReplicatedStorage").Assets.Pets:GetChildren() do
+    if v.ClassName == "Model" then
+        table.insert(pets, v.Name)
+    end
+end
+
+local selectedDeletePet
+
+local excluded = {}
+local recentExlcusions = "Doggy"
+
+Section:CreateDropdown(
+    "Select Pets To Not Delete",
+    pets,
+    function(x)
+        if not table.find(excluded, x) then
+            print("Adding " .. x .. " into exclusions")
+            table.insert(excluded, x)
+            print("Added " .. x .. " into exclusions")
+            recentExlcusions = x
+        else
+            Notification:MakeNotification(
+                {
+                    Name = "SkidWare",
+                    Content = "Already Have This Pet",
+                    Image = "rbxassetid://7072718307",
+                    Time = 2
+                }
+            )
+        end
+    end
+)
+
+local deletePets = {}
+local recentTargetted = "Kitty"
+
+Section:CreateDropdown(
+    "Select Pets To Delete",
+    pets,
+    function(x)
+        if not table.find(deletePets, x) then
+            print("Adding " .. x .. " into targetted")
+            table.insert(deletePets, x)
+            print("Added " .. x .. " into targetted")
+            recentTargetted = x
+        else
+            Notification:MakeNotification(
+                {
+                    Name = "Skidware",
+                    Content = "Already Have This Pet",
+                    Image = "rbxassetid://7072718307",
+                    Time = 2
+                }
+            )
+        end
+    end
+)
+
+Section:CreateButton(
+    "Remove All Exclusions",
+    function()
+        table.clear(excluded)
+    end
+)
+
+Section:CreateButton(
+    "Remove All Targetted",
+    function()
+        table.clear(deletePets)
+    end
+)
+
+local exclusionslabel = Section:CreateLabel("Recent Exclusions: " .. recentExlcusions)
+local targettingpetslabel = Section:CreateLabel("Recent Target: " .. recentTargetted)
+
+spawn(
+    function()
+        while true do
+            wait()
+            exclusionslabel:UpdateText("Recent Exclusions: " .. recentExlcusions)
+            targettingpetslabel:UpdateText("Recent Target: " .. recentTargetted)
+        end
+    end
+)
+
+function nameToId(a)
+    for _, v in next, game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Container.Pets.Content.Frame.Items:GetDescendants(
+
+    ) do
+        if v:IsA("TextLabel") and a == v.Text then
+            return v.Parent.Parent.Name
+        end
+    end
+end
+
+Section:CreateToggle(
+    "Delete Selected Pets",
+    nil,
+    function(x)
+        getgenv().DeleteSelectedPets = x
+
+        while DeleteSelectedPets do
+            pcall(
+                function()
+                    for _, v in next, deletePets do
+                        local args = {
+                            [1] = {
+                                [1] = tostring(nameToId(v))
+                            }
+                        }
+                        game:GetService("ReplicatedStorage").Events.MultiDeletePets:FireServer(unpack(args))
+                        print("Deleted: " .. nameToId(v) .. " | " .. v)
+                        task.wait(1)
+                    end
+                end
+            )
+            task.wait(1)
+        end
+    end
+)
+
+function breakblock(pos)
+    local args = {
+        [1] = pos
+    }
+
+    game:GetService("ReplicatedStorage").Events.MineBlock:FireServer(unpack(args))
+end
+
+local Mod = require(game:GetService("ReplicatedStorage").SharedModules.ChunkUtil)
+
+function InstantTeleport(Cell)
+    game.ReplicatedStorage.Events.RemoveTeleporter:FireServer()
+    game.ReplicatedStorage.Events.PlaceTeleporter:FireServer(Cell)
+    game.ReplicatedStorage.Events.GotoTeleporter:FireServer()
+    game.ReplicatedStorage.Events.RemoveTeleporter:FireServer()
+end
+
+local Tab = Window:CreateTab("Farm Ores + Webhooks")
+
+local Section = Tab:CreateSection("Farm")
+
+function getPartBelow()
+    local Character = game.Players.LocalPlayer.Character
+    local Foot = Character.RightFoot
+    local RayOrigin = Foot.Position
+    local RayDirection = Vector3.new(0, -1, 0)
+
+    local Params = RaycastParams.new()
+    Params.FilterType = Enum.RaycastFilterType.Blacklist
+    Params.FilterDescendantsInstances = {Character}
+
+    local Result = workspace:Raycast(RayOrigin, RayDirection, Params)
+
+    if Result then
+        local RayInstance = Result.Instance
+        return RayInstance
+    end
+
+    return nil
+end
+
+local selectedore
+local selectedore2
+local selectedore3
+
+function tp3(...)
+    local plr = game.Players.LocalPlayer
+    local args = {...}
+    if typeof(args[1]) == "number" and args[2] and args[3] then
+        args = Vector3.new(args[1], args[2], args[3])
+    elseif typeof(args[1]) == "Vector3" then
+        args = args[1]
+    elseif typeof(args[1]) == "CFrame" then
+        args = args[1].Position
+    end
+    local dist = (plr.Character.HumanoidRootPart.Position - args).Magnitude
+    game:GetService("TweenService"):Create(
+        plr.Character.HumanoidRootPart,
+        TweenInfo.new(dist / 30, Enum.EasingStyle.Linear),
+        {CFrame = CFrame.new(args)}
+    ):Play()
+end
+
+function placeteleport(a)
+    local args = {
+        [1] = a
+    }
+
+    game:GetService("ReplicatedStorage").Events.PlaceTeleporter:FireServer(unpack(args))
+end
+
+function teleport()
+    game:GetService("ReplicatedStorage").Events.GotoTeleporter:FireServer()
+end
+
+function RemoveTableDupes(tab)
+    local hash = {}
+    local res = {}
+    for _, v in ipairs(tab) do
+        if (not hash[v]) then
+            res[#res + 1] = v
+            hash[v] = true
+        end
+    end
+    return res
+end
+
+local orestable = {}
+
+for _, v in next, game:GetService("ReplicatedStorage").Assets.BlockDecorations:GetChildren() do
+    table.insert(orestable, v.Name)
+end
+
+local orestable = RemoveTableDupes(orestable)
+
+local selectedore = ""
+
+local closestPartMagnitude = math.huge
+
+local tmpMagnitude
+
+local targettingorelabel = Section:CreateLabel("Targetting Ore: " .. selectedore)
+
+spawn(
+    function()
+        while true do
+            wait(1)
+            targettingorelabel:UpdateText("Targetting Ore: " .. selectedore)
+        end
+    end
+)
+
+Section:CreateToggle(
+    "Mine Selected Ores | Tween",
+    nil,
+    function(x)
+        getgenv().mineselectedores = x
+
+        while mineselectedores do
+            task.wait()
+            local closest = getPartBelow()
+            if closest ~= nil then
+                task.wait()
+                local Pos = closest.Position
+                local NewPos = Mod.worldToCell(Pos)
+                task.spawn(
+                    function()
+                        task.wait()
+                        for _, v in next, game:GetService("Workspace").Chunks:GetDescendants() do
+                            if
+                                v:IsA("BasePart") and
+                                    (v.Name == selectedore or v.Name == selectedore2 or v.Name == selectedore3)
+                             then
+                                tp3(v.Position + Vector3.new(0, 10, 0))
+                                breakblock(NewPos)
+                                task.wait(10)
+                            end
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+
+local teleportFarmOres = Section:CreateToggle(
+    "Mine Selected Ores | Teleport",
+    nil,
+    function(x)
+        getgenv().mineselectedores2 = x
+
+        while mineselectedores2 do
+            task.wait()
+            if mineselectedores2 == true then
+                local closest = getPartBelow()
+                if closest ~= nil then
+                    task.wait()
+                    local Pos = closest.Position
+                    local NewPos = Mod.worldToCell(Pos)
+                    task.spawn(
+                        function()
+                            for _, v in next, game:GetService("Workspace").Chunks:GetDescendants() do
+                                if v:IsA("BasePart") and (v.Name == selectedore) then
+                                    b = Mod.worldToCell(v.Position)
+                                    InstantTeleport(b)
+                                    task.wait(0.1)
+                                    breakblock(b)
+                                    task.wait(0.75)
+                                end
+                            end
+                        end
+                    )
+                else
+                    break
+                end
+            end
+        end
+    end
+)
+
+teleportFarmOres:CreateKeybind("F")
+
+Section:CreateDropdown(
+    "Select Ore",
+    orestable,
+    function(x)
+        selectedore = x
+    end
+)
+
+Section:CreateToggle(
+    "Advanced Auto Rebirth 2",
+    nil,
+    function(x)
+        getgenv().autosell = x
+
+        while autosell do
+            task.wait()
+            pcall(
+                function()
+                    if coinsAndInv >= rebirthCostSimplified then
+                        Notification:MakeNotification(
+                            {
+                                Name = "SkidWare",
+                                Content = "About to rebirth:",
+                                Image = "rbxassetid://7072718307",
+                                Time = 2
+                            }
+                        )
+                        task.wait(10)
+                        game:GetService("ReplicatedStorage").Events.Teleport:FireServer(areaSell .. "Sell")
+                        task.wait(0.1)
+                        game:GetService("ReplicatedStorage").Events.QuickSell:FireServer()
+                        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
+                    else
+                        --
+                    end
+                end
+            )
+            task.wait()
+        end
+    end
+)
+
+local restartDelay
+
+Section:CreateToggle(
+    "Farm Restart | Use if farm stops",
+    nil,
+    function(x)
+        getgenv().restartFarm = x
+
+        while restartFarm do
+            keypress(0x46)
+            task.wait(0.1)
+            keyrelease(0x46)
+            task.wait(0.1)
+            keypress(0x46)
+            task.wait(0.1)
+            keyrelease(0x46)
+            task.wait(restartDelay)
+        end
+    end
+)
+
+Section:CreateSlider(
+    "Farm Restart Delay | Seconds",
+    5,
+    500,
+    30,
+    true,
+    function(x)
+        restartDelay = x
+    end
+)
+
+Section:CreateButton(
+    "Load Ores",
+    function()
+        tp3(142.5, -11532, 202.5)
+    end
+)
+
+Section:CreateLabel("Use the auto rebirth above if using")
+Section:CreateLabel("Mine ore farm to farm rebirths")
+Section:CreateLabel("this requires sell area but not mining point")
+Section:CreateLabel("To Teleport you need gamepass: 174 Robux")
+Section:CreateLabel("for farm reset to work, keep toggle bind as F")
+
+local Section = Tab:CreateSection("Webhooks")
+
+Section:CreateTextBox(
+    "Test Webhook",
+    "Webhook here",
+    false,
+    function(x)
+        local Webhook = x
+        local Headers = {["content-type"] = "application/json"}
+        local Info = {
+            ["content"] = "",
+            ["embeds"] = {
+                {
+                    ["title"] = "Testing: Working | " .. game.Players.LocalPlayer.Name,
+                    ["color"] = tonumber(0x00000),
+                    ["fields"] = {}
+                }
+            }
+        }
+        local Info = game:GetService("HttpService"):JSONEncode(Info)
+        local HttpRequest = http_request
+        if syn then
+            HttpRequest = syn.request
+        else
+            HttpRequest = http_request
+        end
+        HttpRequest({Url = Webhook, Body = Info, Method = "POST", Headers = Headers})
+    end
+)
+
+Section:CreateTextBox(
+    "Hatch Webhook",
+    "Webhook here",
+    false,
+    function(x)
+        local Webhook = x
+        local Headers = {["content-type"] = "application/json"}
+        local Chat =
+            game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
+
+        Chat.ChildAdded:Connect(
+            function(instance)
+                if string.find(instance.TextLabel.Text, "[Server]") then
+                    local Info = {
+                        ["content"] = "",
+                        ["embeds"] = {
+                            {
+                                ["title"] = instance.TextLabel.Text ..
+                                    " \nEggs Hatched: " ..
+                                        tostring(game:GetService("Players").LocalPlayer.leaderstats.Eggs.Value),
+                                ["color"] = tonumber(0x00000),
+                                ["fields"] = {}
+                            }
+                        }
+                    }
+                    local Info = game:GetService("HttpService"):JSONEncode(Info)
+                    local HttpRequest = http_request
+                    if syn then
+                        HttpRequest = syn.request
+                    else
+                        HttpRequest = http_request
+                    end
+                    HttpRequest({Url = Webhook, Body = Info, Method = "POST", Headers = Headers})
+                end
+            end
+        )
+    end
+)
+
+Section:CreateTextBox(
+    "Rebirth Webhook",
+    "Webhook here",
+    false,
+    function(x)
+        spawn(
+            function()
+                game:GetService("Players").LocalPlayer.leaderstats.Rebirths:GetPropertyChangedSignal("Value"):Connect(
+                    function()
+                        local Webhook = x
+                        local Headers = {["content-type"] = "application/json"}
+                        local Info = {
+                            ["content"] = "",
+                            ["embeds"] = {
+                                {
+                                    ["title"] = "Rebirthed Successfully | Current Rebirths: " ..
+                                        tostring(game:GetService("Players").LocalPlayer.leaderstats.Rebirths.Value),
+                                    ["color"] = tonumber(0x00000),
+                                    ["fields"] = {}
+                                }
+                            }
+                        }
+                        local Info = game:GetService("HttpService"):JSONEncode(Info)
+                        local HttpRequest = http_request
+                        if syn then
+                            HttpRequest = syn.request
+                        else
+                            HttpRequest = http_request
+                        end
+                        HttpRequest({Url = Webhook, Body = Info, Method = "POST", Headers = Headers})
+                    end
+                )
+            end
+        )
+    end
+)
+
+Section:CreateLabel("If character isn't tweening")
+Section:CreateLabel("then break a few blocks downwards")
+Section:CreateLabel("also use automine for more efficiency")
+Section:CreateLabel("this is slightly buggy")
+Section:CreateLabel("Advanced Auto Sell Don't Need Mining Point")
+Section:CreateLabel("It only needs Selected Sell Area")
+
+local Tab = Window:CreateTab("Settings + Info")
+
+local Section = Tab:CreateSection("Settings")
+
+local toggleui =
+    Section:CreateToggle(
+    "Toggle UI",
+    nil,
+    function(x)
+        for _, v in next, game:GetService("CoreGui"):GetChildren() do
+            a = v:FindFirstChild("ToolTip")
+            if a then
+                if x == true then
+                    a.Parent.Enabled = false
+                elseif x == false then
+                    a.Parent.Enabled = true
+                end
+            end
+        end
+    end
+)
+
+toggleui:CreateKeybind("RightShift")
+
+Section:CreateButton(
+    "Join Discord Server",
+    function()
+        local http = game:GetService("HttpService")
+        if toClipboard then
+            toClipboard("https://discord.gg/simulator")
+        else
+        end
+        local req =
+            syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or
+            getgenv().request or
+            request
+        if req then
+            req(
+                {
+                    Url = "http://127.0.0.1:6463/rpc?v=1",
+                    Method = "POST",
+                    Headers = {
+                        ["Content-Type"] = "application/json",
+                        Origin = "https://discord.com"
+                    },
+                    Body = http:JSONEncode(
+                        {
+                            cmd = "INVITE_BROWSER",
+                            nonce = http:GenerateGUID(false),
+                            args = {code = "simulator"}
+                        }
+                    )
+                }
+            )
+        end
+    end
+)
+
+Section:CreateButton(
+    "Close GUI",
+    function()
+        for _, v in next, game:GetService("CoreGui"):GetChildren() do
+            if v:FindFirstChild("ToolTip") then
+                v:Destroy()
+                break
+            end
+        end
+    end
+)
+
+Section:CreateToggle(
+    "Close Game",
+    nil,
+    function(x)
+        game:Shutdown()
+    end
+)
+
+Section:CreateToggle(
+    "Rejoin Game",
+    nil,
+    function(x)
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+    end
+)
+
+Section:CreateToggle(
+    "Anti AFK",
+    nil,
+    function(x)
+        local vu = game:GetService("VirtualUser")
+        game:GetService("Players").LocalPlayer.Idled:Connect(
+            function()
+                vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                wait(1)
+                vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+            end
+        )
+    end
+)
+
+local Section = Tab:CreateSection("Game Info")
+
+local blocks =
+    Section:CreateLabel(game:GetService("Workspace").Worlds["The Overworld"].Sign.Display.SurfaceGui.Info.Text)
+local rebirth = Section:CreateLabel("Next Rebirth: ")
+local petsequipped = Section:CreateLabel("Pets Equipped: ")
+local eggslabel = Section:CreateLabel("Eggs Hatched: ")
+local rebirthsval = Section:CreateLabel("Rebirths: ")
+local gemsval = Section:CreateLabel("Gems: ")
+local coinsval = Section:CreateLabel("Coins: ")
+local bakcpkacval = Section:CreateLabel("Backpack: ")
+local bakcpkacvalue = Section:CreateLabel("Backpack Value: ")
+local rebirthproject = Section:CreateLabel("Rebirth Progress: ")
+
+function abbreviateNumber(n)
+    local s = tostring(math.floor(n))
+    return string.sub(s, 1, ((#s - 1) % 3) + 1) ..
+        ({
+            "",
+            "K",
+            "M",
+            "B",
+            "T",
+            "QA",
+            "QI",
+            "SX",
+            "SP",
+            "OC",
+            "NO",
+            "DC",
+            "UD",
+            "DD",
+            "TD",
+            "QAD",
+            "QID",
+            "SXD",
+            "SPD",
+            "OCD",
+            "NOD",
+            "VG",
+            "UVG"
+        })[math.floor((#s - 1) / 3) + 1]
+end
+
+task.spawn(
+    function()
+        while true do
+            task.wait()
+            blocks:UpdateText(game:GetService("Workspace").Worlds["The Overworld"].Sign.Display.SurfaceGui.Info.Text)
+            rebirth:UpdateText(
+                "Next Rebirth Cost: " ..
+                    game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Rebirth.Frame.Buy.Frame.Container.Label.Text
+            )
+            petsequipped:UpdateText(
+                "Pets Equipped: " ..
+                    game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Container.Pets.Bottom.Pets.Label.Text
+            )
+            eggslabel:UpdateText("Eggs Hatched: " .. game:GetService("Players").LocalPlayer.leaderstats.Eggs.Value)
+            rebirthsval:UpdateText("Rebirths: " .. game:GetService("Players").LocalPlayer.leaderstats.Rebirths.Value)
+            coinsval:UpdateText(
+                "Coins: " .. game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.HUD.Left.Coins.Label.Text
+            )
+            gemsval:UpdateText(
+                "Gems: " .. game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.HUD.Left.Gems.Label.Text
+            )
+            bakcpkacval:UpdateText(
+                "Backpack Storage: " ..
+                    tostring(
+                        string.gsub(
+                            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.HUD.Left.Backpack.Label.Text,
+                            "/ ~ skidware",
+                            ""
+                        )
+                    )
+            )
+            bakcpkacvalue:UpdateText("Backpack Value: " .. abbreviateNumber(getInventoryValue()))
+        end
+    end
+)
+
+Section:CreateLabel("- - - - - - - - - - - - - - - -")
+
+spawn(
+    function()
+        while true do
+            wait()
+            rebirthproject:UpdateText(
+                "Rebirth Progress: " ..
+                    abbreviateNumber(coinsAndInv) ..
+                        " / " ..
+                            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Rebirth.Frame.Buy.Frame.Container.Label.Text
+            )
+        end
+    end
+)
+
+rebirthsthing = game:GetService("Players").LocalPlayer.leaderstats.Rebirths.Value
+
+_rebirthlabel = Section:CreateLabel("Rebirths Since Execution: ")
+_timesincelabel = Section:CreateLabel("Time Since Execution: ")
+
+_timesinceexec = tick()
+
+task.spawn(
+    function()
+        while true do
+            _rebirthlabel:UpdateText(
+                "Rebirths Since Execution: " ..
+                    rebirthsthing - game:GetService("Players").LocalPlayer.leaderstats.Rebirths.Value
+            )
+            _timesincelabel:UpdateText("Time Since Execution: " .. math.floor(_timesinceexec - tick()) .. " Seconds")
+            task.wait(1)
+        end
+    end
+)
+
+Section:CreateLabel("Advanced Auto Farm Information")
+Section:CreateLabel("Calculates backpack worth & multipliers")
+Section:CreateLabel("If its equal to rebirth price, then it'll rebirth")
+Section:CreateLabel("- - - - - - - - - - - - - - - -")
+Section:CreateLabel("REMOVE ALL ORES FROM BEING LOCKED!")
+Section:CreateLabel("| FOR BEST MINING POINT |")
+Section:CreateLabel("| SET IT ABOVE YOUR HOLE |")
+
+task.wait(1)
+
+Notification:MakeNotification(
+    {
+        Name = "SkidWare",
+        Content = "Cock and ball torture in " .. math.floor(tick() - startTick) .. " Seconds",
+        Image = "rbxassetid://7072718307",
+        Time = 2
+    }
+)
