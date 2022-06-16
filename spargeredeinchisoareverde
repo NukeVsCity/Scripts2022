@@ -16,7 +16,7 @@ do
     setreadonly(mt, false);
     mt.__newindex = newcclosure(function(self, k, v)
         if (k == 'Text' and v == 'Jailbreak') then
-            v = "- Nice Try Bro"
+            v = "Jailbreak"
         end;
         return oldnidx(self, k, v)
     end);
