@@ -1,0 +1,4 @@
+for i,v in pairs(game:GetService("Workspace").Map.Stages.Boosts["1"]:GetChildren()) do
+   firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v["0"],0)
+end
+
