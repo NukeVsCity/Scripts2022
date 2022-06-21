@@ -1,0 +1,12 @@
+getgenv().toggle = true
+   
+while task.wait() and toggle do
+   local args = {
+       [1] = "Crate",
+       [2] = "Rare Crate",
+       [3] = 99
+   }
+   
+   game:GetService("ReplicatedStorage").Events.PurchaseRebirthShopItem:FireServer(unpack(args))
+end
+
