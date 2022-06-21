@@ -11,7 +11,7 @@ local startTick = tick()
 repeat task.wait() until game:IsLoaded()
 
 pcall(function()
-    game.Players.LocalPlayer.Character.Head.PlayerTitle.Username.Text = "Spoofed By Nuke The Great"
+    game.Players.LocalPlayer.Character.Head.PlayerTitle.Username.Text = "Black Nigga Monkey Boy"
 end)
 
 local eggs = {}
@@ -125,7 +125,7 @@ function codes()
 end
 
 local title =
-    "SkidWare by NukeVsCity"
+    "The Gay People V6 by ku"
 
 local Config = {
     WindowName = title,
@@ -139,8 +139,8 @@ local Notification = loadstring(game:HttpGet(("https://raw.githubusercontent.com
 
 Notification:MakeNotification(
     {
-        Name = "Skidware",
-        Content = "Welcome " .. game.Players.LocalPlayer.Name .. " the hub is loading now!",
+        Name = "The Gay People V6",
+        Content = "Welcome " .. game.Players.LocalPlayer.DisplayName .. " the The Gay People V6 is loading now!",
         Image = "rbxassetid://7072718307",
         Time = 1
     }
@@ -1155,7 +1155,7 @@ Section:CreateTextBox(
             ["content"] = "",
             ["embeds"] = {
                 {
-                    ["title"] = "Testing: Working | " .. game.Players.LocalPlayer.Name,
+                    ["title"] = "The Gay People V6: Working | " .. game.Players.LocalPlayer.DisplayName,
                     ["color"] = tonumber(0x00000),
                     ["fields"] = {}
                 }
