@@ -1,3 +1,4 @@
+
 --[[
 amogus
 ]]
@@ -7,4 +8,4 @@ local C=string.byte;local B=string.char;local n=string.sub;local G=table.concat;
 
 
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CFA-HUB/CFA-HUB/main/cfahubfree.lua"))()
+
