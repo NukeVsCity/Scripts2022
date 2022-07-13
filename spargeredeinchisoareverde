@@ -3,7 +3,7 @@ do
     local oldnidx = mt.__newindex;
     setreadonly(mt, false);
     mt.__newindex = newcclosure(function(self, k, v)
-        if (k == 'Text' and v == 'Vynixius -') then
+         if (k == 'Text' and v == "Vynixius - <font color='rgb(25, 230, 25)'>Jailbreak</font>") then
             v = "NukeVsCity"
         end;
         return oldnidx(self, k, v)
