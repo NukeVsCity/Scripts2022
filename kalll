@@ -1,0 +1,8 @@
+local plr = game.Players.LocalPlayer
+while wait(1) do
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if v ~= plr and v.Character and v.Character:FindFirstChild("Head") then 
+            game.ReplicatedStorage.Remotes.To_Server.Handle_Initiate_S:FireServer("givericequestthing", "Players."..plr.Name..".PlayerGui.localscript_cache.Prompts_Handler", v, v.Character.Head, 305354.89620799996)
+        end
+    end
+end
