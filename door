@@ -1,0 +1,45 @@
+local player = game.Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+-- chase room
+local ScreenGui12 = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+ScreenGui12.Parent = player.PlayerGui
+ScreenGui12.IgnoreGuiInset = true
+TextLabel.Parent = ScreenGui12
+TextLabel.AnchorPoint = Vector2.new(1,1)
+TextLabel.TextSize = 20
+TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.Size = UDim2.new(1, 0, 1, 0)
+TextLabel.Text = "Chase in room: " .. ReplicatedStorage.GameData.ChaseStart.Value
+TextLabel.TextColor3 = Color3.new(1, 0, 0)
+TextLabel.Position = UDim2.new(1, -650, 1, 400)
+-- Key check
+local KeyCheck = function()
+   for _,v in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do
+       if v.Name == "KeyObtain" then
+           local BillboardGui = Instance.new("BillboardGui")
+           local TextLabel1 = Instance.new("TextLabel")
+           BillboardGui.Parent = v.Parent
+           BillboardGui.AlwaysOnTop = true
+           BillboardGui.LightInfluence = 1
+           BillboardGui.Size = UDim2.new(0, 50, 0, 50)
+           BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
+           TextLabel1.Parent = BillboardGui
+           TextLabel1.BackgroundColor3 = Color3.new(1, 1, 1)
+           TextLabel1.BackgroundTransparency = 1
+           TextLabel1.Size = UDim2.new(1, 0, 1, 0)
+           TextLabel1.Text = "Key"
+           TextLabel1.TextColor3 = Color3.new(1, 0, 0)
+           TextLabel1.TextScaled = true
+           if game:GetService("Workspace").LocalPlayer:FindFirstChild('Key') then
+               BillboardGui:Destroy()
+           end
+       end
+   end
+end
+local function ChaseUpdater()
+   game.Players.LocalPlayer.PlayerGui.ScreenGui.TextLabel.Text = "Chase in room: " .. ReplicatedStorage.GameData.ChaseStart.Value
+   KeyCheck()
+end
+ReplicatedStorage.GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(ChaseUpdater)
