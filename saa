@@ -1,0 +1,12 @@
+
+
+
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/hackingatpanzer/aaaaa/main/thelibs")()
+local win = DiscordLib:Window("NukeVsCity Script Hub")
+local serv = win:Server("Main Scripts", "http://www.roblox.com/asset/?id=7691579357")
+           local btns = serv:Channel("DOORS")
+                             btns:Button("ghost gui ( click to execute )", function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua"))()
+       end)
+       
+       btns:Seperator()
