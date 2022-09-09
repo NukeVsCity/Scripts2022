@@ -1,2 +1,2 @@
-writefile('KINGKEY.KING',"7AmPJM6tnTaxb7qAHcmcLbNQq22MggcF7mFRah477fIGE5YhTDkaKK6NkdsGUGPr")
+writefile('KINGKEY.KING',"eqRYZmvsefMPfHeEth2UIn5xumasm33UPbqQ2V7D99GgzRGtzVxI3yPbsVhYa74C")
 loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()
