@@ -1,3 +1,4 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/velshindo"))()
 repeat wait() until game:GetService("CoreGui")["Vellerius Loader"].Main.TextBox.Text
-game:GetService("CoreGui")["Vellerius Loader"].Main.TextBox.Text = "4e4ade7c71349aed9519b63feb7cd46def43bb733364b9ae607e537b888155c6"
+game:GetService("CoreGui")["Vellerius Loader"].Main.TextBox.Text = "301a286cf6b40a8b73624c51fe652bd53c1f0235183d75ae08928956c55d0ae9"
+--im such a genius like
