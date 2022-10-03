@@ -1,0 +1,6 @@
+for i,v in pairs(game.ReplicatedStorage.Player_Data[game.Players.LocalPlayer.Name].Customization:GetDescendants()) do
+    if v:IsA("NumberValue") or v:IsA("StringValue") or v:IsA("IntValue") or v:IsA("BoolValue") then
+        game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer("Change_Value",v,true)
+    end
+end
+game:GetService("TeleportService"):Teleport(5956785391)
