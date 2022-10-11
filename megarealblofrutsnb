@@ -1,0 +1,9 @@
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/blofruits', true))()
+wait(3)
+while wait(1) do
+game:GetService("CoreGui").ScreenGui.KeySys.ENTERKEY.Text = "i38ijjh388hasfu37yashyuy278udajfh"
+end
+
+
+--everyday i feel smarter then befor 
