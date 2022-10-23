@@ -1,0 +1,89 @@
+
+
+--me is too lazy to obufucate
+
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+
+local Window = Library.CreateLib("NukeVsCity", "BloodTheme")
+local Tab = Window:NewTab("SharkBite 2")
+local Section = Tab:NewSection("Stuff")
+Section:NewButton("Kill All As Normal Player", "Toggles killing", function()
+    	    local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        
+        for i,v in pairs(game.Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+        
+                local v1 = v.Character
+                local v2 = game:GetService("Workspace").Sharks.GreatWhite
+                local event = game:GetService("ReplicatedStorage").EventsFolder.Shark.Kill
+                
+                event:FireServer(v1, v2)
+            end
+            
+        end
+      		print("done")
+end)
+
+Section:NewButton("Kill All When U Shark", "Toggles killing", function()
+        local Players = game:GetService("Players")
+        
+        for i,v in pairs(game.Players:GetPlayers()) do
+        
+            local v1 = v.Character
+            local v2 = game:GetService("Workspace").Sharks.GreatWhite
+            local event = game:GetService("ReplicatedStorage").EventsFolder.Shark.Kill
+            
+            event:FireServer(v1, v2)
+        end
+      		print("killing..")
+  	 
+end)
+
+
+Section:NewButton("Inf Teeth", "Toggles infinite teeth", function()
+	    for i=1,1000 do
+	    	    local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
+                
+                for i,v in pairs(game.Players:GetPlayers()) do
+                    if player ~= LocalPlayer then
+                
+                        local v1 = v.Character
+                        local v2 = game:GetService("Workspace").Sharks.GreatWhite
+                        local event = game:GetService("ReplicatedStorage").EventsFolder.Shark.Kill
+                        
+                        event:FireServer(v1, v2)
+                    end
+                    
+                end
+            end
+      		print("done inf")
+  	 
+end)
+Section:NewButton("Shark Esp", "Toggles esp", function()
+for _,v in pairs(game.workspace.Sharks:GetChildren()) do
+   local Highlight = Instance.new("Highlight")
+   Highlight.FillColor = Color3.fromRGB(134, 242, 0)
+   Highlight.Parent = v
+   Highlight.OutlineTransparency = 0.3
+   Highlight.FillTransparency = 0.2
+end
+
+local function OnAdded(Shark)
+   local Highlight = Instance.new("Highlight")
+   Highlight.FillColor = Color3.fromRGB(134, 242, 0)
+   Highlight.Parent = Shark
+   Highlight.OutlineTransparency = 0.3
+   Highlight.FillTransparency = 0.2
+end
+
+game:GetService("Workspace").Sharks.ChildAdded:Connect(function(Shark)
+   OnAdded(Shark)
+end)
+  	 
+end)
+  
