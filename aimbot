@@ -1,0 +1,39 @@
+-- Configuration
+
+local Options = {
+   Key = Enum.UserInputType.MouseButton2,
+   Smoothing = 1,
+   FOV = 200,
+   ShowFOV = true,
+   FOVCircleColor = Color3.fromRGB(255, 255, 255),
+   PlayerPart = 'Head'
+}
+
+-- Main Script
+
+local aimbot = loadstring(game:HttpGet'https://github.com/RunDTM/Zeerox-Aimbot/raw/main/library.lua')()
+aimbot.Enabled = true
+
+if Options.Smoothing < 1 then -- because pf is shit
+  Options.Smoothing = 1
+end
+
+for i,v in pairs(Options) do
+   aimbot[i] = v
+end
+
+local plr = game:service'Players'.LocalPlayer
+local Characters = workspace.Players
+
+game:service'RunService'.RenderStepped:Connect(function()
+   for i,v in pairs(Characters:GetChildren()) do
+       if v.Name ~= tostring(plr.TeamColor) then
+           for i2, character in pairs(v:GetChildren()) do
+               local part = character:FindFirstChild(Options.PlayerPart)
+               if part and not table.find(aimbot.CustomParts, part) then
+                   table.insert(aimbot.CustomParts, part)
+               end
+           end
+       end
+   end
+end)
