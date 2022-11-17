@@ -708,7 +708,7 @@ end
 player = game:GetService("Players").LocalPlayer
 pollenLbl = player.Character:FindFirstChild("ProgressLabel",true)
 maxpollen = tonumber(pollenLbl.Text:match("%d+$"))
-repeat wait() until player.CoreStats.Pollen.Value>=maxpollen do 
+while player.CoreStats.Pollen.Value>=maxpollen do 
 
     player.Character:MoveTo(player.SpawnPos.Value.p)
                 wait(0.5)
