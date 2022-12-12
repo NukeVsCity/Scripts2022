@@ -1,0 +1,6 @@
+game:GetService("Workspace").NPCs["Bubble Bee Man 2"].NPC.Value=("Bubble Bee Man 2")
+
+
+
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(89.6066971, 308.062012, -276.473999, -2.51531601e-05, -0.658476591, 0.752601147, -1, 2.51531601e-05, -1.14142895e-05, -1.14142895e-05, -0.752601147, -0.658476591)
