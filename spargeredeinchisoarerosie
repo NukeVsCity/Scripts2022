@@ -1,3 +1,5 @@
+game:GetService("ReplicatedStorage").Game.April2020LiveEventLoader.Name = "SafesUI"
+
 _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
