@@ -1,0 +1,3 @@
+getgenv().Planters = 100 -- Considering capacity
+
+loadstring(game:HttpGet("https://pastebin.com/raw/0HC1eaLC"))()
