@@ -1,4 +1,4 @@
-local key = game:HttpGet("https://pastebin.com/raw/i4PrQaeM")
+local key = game:HttpGet("https://pastebin.com/raw/A6KxJEaA")
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "GRIMCITY",
@@ -15,4 +15,4 @@ game:GetService("CoreGui").ChildAdded:Connect(function(v)
     end
 end)
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/xDestinyx/RipperHub/main/Loader.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/ripperold'))()
