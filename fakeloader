@@ -52,7 +52,7 @@ Tab:AddButton({
         Text = "Try using your partner hoverboard or signing pets",
         Duration = 5,
         })
-	    loadstring(game:HttpGet("https://raw.githubusercontent.com/Boxking776/GrubHub/main/free/SignAndMailSpoof.lua", true))()
+	    loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/fake", true))()
 	    else
 	   OrionLib:MakeNotification({
         	Name = "PSX Partner & Mail Spoof",
