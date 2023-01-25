@@ -1,5 +1,5 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-getgenv().Username = "Boxking776Femboy"
+getgenv().Username = ""
 OrionLib:MakeNotification({
 	Name = "PSX Partner & Mail Spoof",
 	Content = "Good luck, follow the instructions in the UI.",
