@@ -1,0 +1,8 @@
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/toosiwhip/StatueV2/main/statuev2doors.lua"))()
+repeat wait() until game:GetService("CoreGui").RobloxGui
+repeat wait() until game:GetService("CoreGui").RobloxGui.MouseIcon
+repeat wait() until game:GetService("CoreGui").RobloxGui.MouseIcon.Frame.Frame.Frame.Frame
+game:GetService("CoreGui").RobloxGui.MouseIcon.Frame.Frame.Frame.Frame.TextBox.Text = "ZkTVRoB1r7"
+game:GetService("CoreGui").RobloxGui.MouseIcon.Frame.Frame.Frame.Frame.TextButton.TextLabel.Text = "press enter above"
