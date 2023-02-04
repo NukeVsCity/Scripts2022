@@ -5,14 +5,7 @@ hook = hookfunction(game.HttpGet, newcclosure(function(self, ...)
    return hook(self, ...) 
 end))
 
-game.CoreGui.ChildAdded:Connect(function(v)
-   if v.Name == "NexusKeySystem" then
-      v:WaitForChild("Draggable Frame")["Key System"].Text = "key is grimcity"
-      v:WaitForChild("Draggable Frame").ImageLabel:Destroy()
-      v:WaitForChild("Draggable Frame")["Get discord link"].Text = 'Key = "grimcity"'
-      elseif v.Name == "NSLoader" then
-        v:WaitForChild("MainFrame").Hub.Text = "Grimcity On Top"
-    end
-end)
+writefile("NexusKey.lua", "grimcity")
+
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/nexu"))()
