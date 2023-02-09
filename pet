@@ -1,0 +1,38 @@
+
+local Thread1 = coroutine.create(function()
+    _G.threads = 250
+_G.tries = 5
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Empire4946/EZLaggerPlus/main/source",true))()
+end)
+
+
+coroutine.resume(Thread1)
+
+
+
+repeat wait() until game:GetService("CoreGui"):FindFirstChild("Key")
+
+
+
+getgenv().Clown = ""
+getgenv().Panzers = true
+while getgenv().Panzers do wait(0.5)
+    
+for i, v in next, getgc(true) do
+    if type(v) == "table" and rawget(v, "Key") then
+        setclipboard(v.Key)
+        getgenv().Clown = v.Key
+    end
+end
+
+
+game:GetService("CoreGui").Key.Main.Input.InputBox.Text = getgenv().Clown
+
+if game:GetService("CoreGui").Key.Main.Input.InputBox.Text == getgenv().Clown then
+    getgenv().Panzers = false
+end
+end
+
+
+
