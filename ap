@@ -1,0 +1,31 @@
+
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/blacktr"))()
+
+
+repeat wait() until game:GetService("CoreGui").Keys
+repeat wait() until game:GetService("CoreGui").Keys.Frame.InputCode
+
+game:GetService("CoreGui").Keys.Frame.InputCode.Text = "BT-as99sSH98SHA8azpoe0r0r3p5cc661"
+wait(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
