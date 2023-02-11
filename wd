@@ -1,5 +1,5 @@
 -- This file was generated using Luraph Obfuscator v13.5.9
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Muhammad6196/Project-WD/main/Main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Muhammad6196/Project-WD/main/Mainstring.lua"))()
    repeat wait() until game:GetService("Players").LocalPlayer.PlayerGui.Walker 
     game:GetService("Players").LocalPlayer.PlayerGui.Walker.Frame.TextLabel.Text = "bit.ly/projectnuke"
