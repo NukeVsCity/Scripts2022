@@ -1,0 +1,37 @@
+
+local gncm = getnamecallmethod or get_namecall_method or error()
+
+local remote = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+
+local mt = getrawmetatable(game)
+local mt_namecall = mt.__namecall
+local mt_index = mt.__index
+
+setreadonly(mt, false)
+
+local fire = Instance.new("RemoteEvent").FireServer
+local hook = newcclosure(function(self, ...)
+    if self == remote and checkcaller() then
+        return
+    end
+    return fire(self, ...)
+end)
+
+mt.__namecall = newcclosure(function(self, ...)
+    if gncm() == "FireServer" and self == remote and checkcaller() then
+        return
+    end
+    return mt_namecall(self, ...)
+end)
+mt.__index = newcclosure(function(t, k)
+    if mt_index(t, "ClassName") == "RemoteEvent" and k == "FireServer" then
+        return hook
+    end
+    return mt_index(t, k)
+end)
+
+setreadonly(mt, true)
+game:GetService("Chat").ChatScript:Destroy()
+game:GetService("Chat").ChatModules:Destroy()
+game:GetService("CoreGui").BubbleChat:Destroy()
+game:GetService("Chat").ChatServiceRunner:Destroy()
