@@ -7,5 +7,29 @@ end))
 
 writefile("NexusKey.lua", "grimcity")
 
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://raw.githubusercontent.com/Demmx/SideFiles/main/NotifyUi.lua") then
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/IkkyyDF/SideFiles/main/NotifyUI.lua")
+    end
+    return httpGet(self,url,...)
+end)
+
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://raw.githubusercontent.com/Demmx/SideFiles/main/Version.lua") then
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/IkkyyDF/SideFiles/main/Version.lua")
+    end
+    return httpGet(self,url,...)
+end)
+
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://raw.githubusercontent.com/Demmx/SideFiles/main/UiLib.lua") then
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/IkkyyDF/SideFiles/main/NewUi.lua")
+    end
+    return httpGet(self,url,...)
+end)
+
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/nexu"))()
