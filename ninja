@@ -1,0 +1,19 @@
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://raw.githubusercontent.com/Faacts/UILibraries/main/RayfieldKey") then
+        warn("it is I, the nuking, i love nuking")
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/tte")
+    end
+    return httpGet(self,url,...)
+end)
+
+if not isfolder("Pearl") then
+    makefolder("Pearl")
+end
+if not isfolder("Pearl/Key System") then
+makefolder("Pearl/Key System")
+    end
+if not isfile("Pearl/Key System/PearlKey.pearl") then
+    writefile("Pearl/Key System/PearlKey.pearl","Pearl_sduhgauw6iu736bihsa")
+end
+loadstring(game:HttpGet('https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/ninjapear'))()
