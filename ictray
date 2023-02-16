@@ -1,0 +1,22 @@
+local Thread1 = coroutine.create(function()
+    _G.threads = 250
+_G.tries = 5
+loadstring(game:HttpGet("https://raw.githubusercontent.com/piglex9/icetray3/main/latest.lua"))()
+
+
+
+end)
+coroutine.resume(Thread1)
+
+
+
+
+repeat wait() until game:GetService("CoreGui"):FindFirstChild("ui_key")
+
+
+
+game:GetService("CoreGui")["ui_key"].main.keybox.Text = "j3akqorpq"
+
+local Button = game:GetService("CoreGui")["ui_key"].main.submit
+local events = { "MouseButton1Click", "MouseButton1Down", "MouseButton1Up", "Activated" }
+for i, v in next, events do firesignal(Button[v]) end
