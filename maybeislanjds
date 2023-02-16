@@ -1,0 +1,17 @@
+getgenv().Clown = ""
+for i, v in next, getgc(true) do
+    if type(v) == "table" and rawget(v, "Key") then
+        setclipboard(v.Key)
+        getgenv().Clown = v.Key
+    end
+end
+if not isfolder("Rayfield") then
+    makefolder("Rayfield")
+end
+if not isfolder("Rayfield/Key System") then
+makefolder("Rayfield/Key System")
+    end
+if not isfile("Rayfield/Key System/No file name specified.rfld") then
+    writefile("Rayfield/Key System/No file name specified.rfld","Pearl_sduhgauw6iu736bihsa")
+end
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Islands-IRS/public/main/Islands')))()
