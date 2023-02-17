@@ -1,0 +1,4 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/blckkey", true))()
+repeat wait() until game:GetService("CoreGui"):FindFirstChild("ZENHUB")
+
+game:GetService("CoreGui").ZENHUB.MAIN.keyhere.Text = "KEY-DEBUT"
