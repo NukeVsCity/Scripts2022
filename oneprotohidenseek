@@ -1,0 +1,23 @@
+
+local pay4dollars = '{"f5ebn6ser5htydfdf":"YJx2MgRTLUGwuqesNbzqjfEs"}'
+
+if not isfolder("OneProtocol") then
+    makefolder("OneProtocol")
+end
+
+if not isfile("OneProtocol/Key.json") then
+    writefile("OneProtocol/Key.json",pay4dollars)
+end
+
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/mainpartprotocolus") then
+        warn("Bypassed wl")
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/protocolmanual")
+    end
+    return httpGet(self,url,...)
+end)
+
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/loaderprotocolhidenseek", true))()
