@@ -1,0 +1,3 @@
+game:GetService("Lighting").Atmosphere:GetPropertyChangedSignal("Density"):Connect(function()
+    game:GetService("Lighting").Atmosphere.Density = 0
+end)
