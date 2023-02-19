@@ -1,0 +1,10 @@
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("https://luxhub.cc/scripts/assets/BloxburgAutoFarmPizza.lua") then
+        warn("it is I, the nuking, i love nuking")
+        return httpGet(game.HttpGet,"https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/autopizza")
+    end
+    return httpGet(self,url,...)
+end)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/LUXHUBblox"))()
