@@ -1,0 +1,20 @@
+if not isfolder("Rayfield") then
+    makefolder("Rayfield")
+end
+if not isfolder("Rayfield/Key System") then
+makefolder("Rayfield/Key System")
+    end
+if not isfile("Rayfield/Key System/AnyaStuff.rfld") then
+    writefile("Rayfield/Key System/AnyaStuff.rfld","w0wArcaneODDhahaFREE!")
+end
+
+game.CoreGui.ChildAdded:Connect(function(v)
+   if v.Name == "Key" then
+game:GetService("CoreGui").Key.Main.Input.InputBox.Text = "w0wArcaneODDhahaFREE!"
+game:GetService("CoreGui").Key.Main.NoteMessage.Text = "press enter on gui"
+  end
+end)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/anya"))()
+
+
