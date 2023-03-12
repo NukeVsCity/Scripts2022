@@ -1,0 +1,9 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/BLACKSIMXWINDOWS"))()
+
+
+
+repeat wait() until game:GetService("CoreGui"):FindFirstChild("Keys")
+
+game:GetService("CoreGui").Keys.Frame.InputCode.Text = "BT-Qquw6te5H8TR9RDAjU49rSdy"
+
+game:GetService("CoreGui").Keys.Frame.Title.Text = "PRESS CONFIRM IDIOT"
