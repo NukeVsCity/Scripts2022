@@ -1,0 +1,14 @@
+
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("key.weinz") then
+        warn("it is I, the nuking, i love nuking")
+        return "nukevscity"
+    end
+    return httpGet(self,url,...)
+end)
+
+
+loadstring(game:HttpGet("https://gitlab.com/wspcontr/onemorehub/-/raw/main/scriptloader.lua"))()
+
+
