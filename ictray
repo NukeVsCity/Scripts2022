@@ -15,7 +15,7 @@ repeat wait() until game:GetService("CoreGui"):FindFirstChild("ui_key")
 
 
 
-game:GetService("CoreGui")["ui_key"].main.keybox.Text = "rfuyxn2rl"
+game:GetService("CoreGui")["ui_key"].main.keybox.Text = "z3aq017pd"
 
 local Button = game:GetService("CoreGui")["ui_key"].main.submit
 local events = { "MouseButton1Click", "MouseButton1Down", "MouseButton1Up", "Activated" }
