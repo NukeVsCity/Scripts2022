@@ -1,0 +1,11 @@
+
+
+local petNet = loadstring(game:HttpGet("https://rawscripts.net/raw/Pet-Simulator-X!-PSX-Safe-Networking-3732"))()
+
+local Food = petNet:getPath("Food")
+
+Food.RandomFoodChoice = function(customerOwnerUID, customerOwnerID, isRichCustomer, isPirateCustomer, isNearTree)
+    local spoof = Food.new("45", customerOwnerUID, customerOwnerID, true, true)
+    spoof.IsGold = true
+    return spoof
+end
