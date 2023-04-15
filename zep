@@ -1,4 +1,9 @@
-writefile("ZEPHYR.ZEP","ZEPHYRXKEY93628499072773-au2")
+local key = loadstring(game:HttpGet("https://pastebin.com/raw/icgcrDHk"))()
+
+
+writefile("ZEPHYR.ZEP",key)
+
+
 _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
