@@ -26,14 +26,6 @@ end
 
 
 
-local plr = game:GetService("Players").LocalPlayer
-local plrgGui = plr.PlayerGui
-
-plrgGui.ChildAdded:Connect(function(new)
-if new:IsA("ScreenGui")
-and new.Container.Topbar.TopbarTip then
-new.Text = "TYPE nukevscity FOR PREMIUM IN THE PREMIUM TAB"
-end
 
 
 _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
