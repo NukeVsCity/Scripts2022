@@ -1,7 +1,7 @@
 
 repeat wait() until game:IsLoaded() 
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Novaz5792/X/main/X"))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/x"))() 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2023/main/x"))() 
 
 game.ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("getclientping").OnClientInvoke = function(Novaz5792) 
@@ -72,9 +72,9 @@ local subs = lib.subs
 local libclose = subs.Wait
 
 local window = lib:CreateWindow({
-    Name = "Novaz#5792",
+    Name = "NukeVsCity",
     Themeable = {
-        Info = {"Kalas A Skid"},
+        Info = {"the gypsy"},
         Credit = false, 
         Background = "",
         Visible = true
@@ -129,7 +129,7 @@ section1:AddToggle({
 })
 
 section1:AddToggle({
-    Name = "God Mode", 
+    Name = "God Mode ONLY KAMADO", 
     Value = false, 
     Flag = "GM", 
     Callback = function(state)
@@ -167,11 +167,11 @@ section2:AddToggle({
             if (not debounce) and ((not Player:FindFirstChild("combotangasd123")) or Player:FindFirstChild("combotangasd123") and Player:FindFirstChild("combotangasd123").Value < 1) then 
                 debounce = true 
                 local last = 9999
-                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 1, nil, nil, 99999)
-                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 2, nil, nil, 99999)
-                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 3, nil, nil, 99999)
-                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 4, nil, nil, 99999)
-                last = game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(c, Player, Character, HumanoidRootPart, Humanoid, 919, nil, nil, 99999)
+                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 1)
+                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 2)
+                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 3)
+                game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S:FireServer(c, Player, Character, HumanoidRootPart, Humanoid, 4)
+                last = game:GetService("ReplicatedStorage").Remotes.To_Server.Handle_Initiate_S_:InvokeServer(c, Player, Character, HumanoidRootPart, Humanoid, 919)
                 repeat Heartbeat:Wait() until last ~= 9999 
                 task.wait(1.3)
                 debounce = false 
