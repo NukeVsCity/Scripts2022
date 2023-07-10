@@ -1,3 +1,17 @@
+
+local httpGet
+httpGet = hookfunction(game.HttpGet, function(self, url, ...)
+    if url:find("uirabkc") then
+        warn("it is I, the nuking, i love nuking")
+        return httpGet(game.HttpGet,"https://sirius.menu/rayfield")
+    end
+    return httpGet(self,url,...)
+end)
+
+
+
+
+
 if not isfolder("Rayfield") then
     makefolder("Rayfield")
 end
@@ -7,5 +21,4 @@ makefolder("Rayfield/Key System")
 if not isfile("Rayfield/Key System/CuHubv3Key.rfld") then
     writefile("Rayfield/Key System/CuHubv3Key.rfld","C6lVvr0PLj")
 end
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2022/main/ybacu"))()
