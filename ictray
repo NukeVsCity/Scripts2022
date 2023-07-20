@@ -1,7 +1,7 @@
 local Thread1 = coroutine.create(function()
     _G.threads = 250
 _G.tries = 5
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/Scripts2023/main/iclast"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/piglex9/icetray3/main/latest.lua"))()
 
 
 
